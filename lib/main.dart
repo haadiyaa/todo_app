@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:todo_app/model/task.dart';
+import 'package:todo_app/services/app_router.dart';
 import 'blocs/bloc_exports.dart';
 import 'package:todo_app/screens/homescreen.dart';
 
@@ -13,7 +14,7 @@ void main() async {
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
   Bloc.observer=AppBlocObserver();
-  runApp(const MyApp());
+  runApp(MyApp(appRouter: AppRouter(),));
 }
 
 class AppBlocObserver extends BlocObserver {
@@ -31,15 +32,17 @@ class AppBlocObserver extends BlocObserver {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key,required this.appRouter});
+  final AppRouter appRouter;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => TasksBloc(),
-      child: const MaterialApp(
+      child:  MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomeScreen(),
+        home: const HomeScreen(),
+        onGenerateRoute: appRouter.onGenerenerateRoute,
       ),
     );
   }
