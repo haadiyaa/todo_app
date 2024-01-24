@@ -4,8 +4,16 @@ import 'package:todo_app/model/task.dart';
 import 'package:todo_app/screens/homescreen.dart';
 import 'package:todo_app/screens/recycle_bin.dart';
 
-class DrawerPanel extends StatelessWidget {
+class DrawerPanel extends StatefulWidget {
   const DrawerPanel({super.key});
+
+  @override
+  State<DrawerPanel> createState() => _DrawerPanelState();
+}
+
+class _DrawerPanelState extends State<DrawerPanel> {
+
+  bool switchValue=false;
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +23,7 @@ class DrawerPanel extends StatelessWidget {
         shadowColor: Colors.black,
         backgroundColor: Colors.amber,
         child: Column(
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               width: double.infinity,
@@ -28,7 +37,8 @@ class DrawerPanel extends StatelessWidget {
             BlocBuilder<TasksBloc, TasksState>(
               builder: (context, state) {
                 return GestureDetector(
-                  onTap: () => Navigator.of(context).pushNamed(HomeScreen.id),
+                  onTap: () =>
+                      Navigator.of(context).pushReplacementNamed(HomeScreen.id),
                   child: ListTile(
                     leading: const Icon(Icons.folder),
                     title: const Text('My Tasks'),
@@ -38,13 +48,26 @@ class DrawerPanel extends StatelessWidget {
               },
             ),
             const Divider(),
-            GestureDetector(
-              onTap: () => Navigator.of(context).pushNamed(RecycleBin.id),
-              child: ListTile(
-                leading: Icon(Icons.delete),
-                title: Text('Recently Deleted'),
-                trailing: Text('0'),
-              ),
+            BlocBuilder<TasksBloc, TasksState>(
+              builder: (context, state) {
+                return GestureDetector(
+                  onTap: () =>
+                      Navigator.of(context).pushReplacementNamed(RecycleBin.id),
+                  child: ListTile(
+                    leading: const Icon(Icons.delete),
+                    title: const Text('Recently Deleted'),
+                    trailing: Text('${state.removedTasks.length}'),
+                  ),
+                );
+              },
+            ),
+            Switch(
+              value: switchValue,
+              onChanged: (newValue) {
+                setState(() {
+                  switchValue=newValue;
+                });
+              },
             ),
           ],
         ),
