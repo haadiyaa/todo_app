@@ -15,7 +15,12 @@ class AddTaskScreen extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          TextField(
+          TextFormField(
+            validator: (value) {
+              if(titleController.text==null){
+                
+              }
+            },
             autofocus: true,
             controller: titleController,
             decoration: const InputDecoration(
@@ -27,7 +32,7 @@ class AddTaskScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              TextButton(
+              ElevatedButton(
                 onPressed: () => Navigator.pop(context),
                 child: const Text('Cancel'),
               ),

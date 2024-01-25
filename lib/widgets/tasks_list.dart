@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/widgets/task_tile.dart';
-import '../blocs/bloc_exports.dart';
 import 'package:todo_app/model/task.dart';
 
 class TaskList extends StatelessWidget {
@@ -14,7 +13,8 @@ class TaskList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: ListView.builder(
+      child: ListView.separated(
+        separatorBuilder: (context, index) => SizedBox(height: 5,),
         itemCount: tasksList.length,
         itemBuilder: (BuildContext context, int index) {
           var task = tasksList[index];

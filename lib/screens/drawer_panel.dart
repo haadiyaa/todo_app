@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/blocs/bloc_exports.dart';
-import 'package:todo_app/model/task.dart';
-import 'package:todo_app/screens/homescreen.dart';
+import 'package:todo_app/screens/pending_tasks_screen.dart';
 import 'package:todo_app/screens/recycle_bin.dart';
+import 'package:todo_app/screens/tabs_screen.dart';
 
-class DrawerPanel extends StatefulWidget {
-  const DrawerPanel({super.key});
+class DrawerPanel extends StatelessWidget {
+  DrawerPanel({super.key});
 
-  @override
-  State<DrawerPanel> createState() => _DrawerPanelState();
-}
-
-class _DrawerPanelState extends State<DrawerPanel> {
-
-  bool switchValue=false;
+  bool switchValue = false;
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +15,14 @@ class _DrawerPanelState extends State<DrawerPanel> {
       child: Drawer(
         elevation: 10,
         shadowColor: Colors.black,
-        backgroundColor: Colors.amber,
         child: Column(
           // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               width: double.infinity,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              color: Colors.grey,
               child: Text(
-                'task drawer',
+                'Task Drawer',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),
@@ -38,16 +30,15 @@ class _DrawerPanelState extends State<DrawerPanel> {
               builder: (context, state) {
                 return GestureDetector(
                   onTap: () =>
-                      Navigator.of(context).pushReplacementNamed(HomeScreen.id),
+                      Navigator.of(context).pushReplacementNamed(TabsScreen.id),
                   child: ListTile(
                     leading: const Icon(Icons.folder),
                     title: const Text('My Tasks'),
-                    trailing: Text('${state.allTasks.length}'),
+                    trailing: Text('${state.pendingTasks.length}'),
                   ),
                 );
               },
             ),
-            const Divider(),
             BlocBuilder<TasksBloc, TasksState>(
               builder: (context, state) {
                 return GestureDetector(
@@ -61,12 +52,16 @@ class _DrawerPanelState extends State<DrawerPanel> {
                 );
               },
             ),
-            Switch(
-              value: switchValue,
-              onChanged: (newValue) {
-                setState(() {
-                  switchValue=newValue;
-                });
+            BlocBuilder<SwitchBloc, SwitchState>(
+              builder: (context, state) {
+                return Switch(
+                  value: state.switchValue,
+                  onChanged: (newValue) {
+                    newValue
+                        ? context.read<SwitchBloc>().add(SwitchOnEvent())
+                        : context.read<SwitchBloc>().add(SwitchOffEvent());
+                  },
+                );
               },
             ),
           ],
