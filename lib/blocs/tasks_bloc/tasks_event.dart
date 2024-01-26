@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'tasks_bloc.dart';
 
 sealed class TasksEvent extends Equatable {
@@ -41,4 +42,18 @@ class DeleteTask extends TasksEvent {
 
   @override
   List<Object> get props => [task];
+}
+
+class EditTask extends TasksEvent {
+  final Task oldTask;
+  final Task newTsak;
+  const EditTask({
+    required this.oldTask,
+    required this.newTsak,
+  });
+  @override
+  List<Object> get props => [
+        oldTask,
+        newTsak,
+      ];
 }

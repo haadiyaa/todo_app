@@ -6,12 +6,14 @@ class Task extends Equatable {
   final String id;
   bool? isDone;
   bool? isDeleted;
+  final String date;
 
   Task({
     required this.title,
     required this.id,
     this.isDone,
     this.isDeleted,
+     required this.date,
   }) {
     isDone = isDone ?? false;
     isDeleted = isDeleted ?? false;
@@ -26,6 +28,7 @@ class Task extends Equatable {
     return Task(
       title: title ?? this.title,
       id: id??this.id,
+      date: date??this.date,
       isDone: isDone ?? this.isDone,
       isDeleted: isDeleted ?? this.isDeleted,
     );
@@ -35,6 +38,7 @@ class Task extends Equatable {
     return <String, dynamic>{
       'title': title,
       'id': id,
+      'date': date,
       'isDone': isDone,
       'isDeleted': isDeleted,
     };
@@ -44,6 +48,7 @@ class Task extends Equatable {
     return Task(
       title: map['title'] as String,
       id: map['id'] as String,
+      date: map['date'] as String,
       isDone: map['isDone'] != null ? map['isDone'] as bool : null,
       isDeleted: map['isDeleted'] != null ? map['isDeleted'] as bool : null,
     );
@@ -53,6 +58,7 @@ class Task extends Equatable {
   List<Object?> get props => [
         title,
         id,
+        date,
         isDone,
         isDeleted,
       ];

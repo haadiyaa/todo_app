@@ -30,7 +30,7 @@ class RecycleBin extends StatelessWidget {
             shadowColor: Colors.black,
             elevation: 2,
             title: const Text(
-              'Recycle Bin',
+              'Recently Deleted',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 30,

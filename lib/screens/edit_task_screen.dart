@@ -3,15 +3,20 @@ import 'package:todo_app/blocs/bloc_exports.dart';
 import 'package:todo_app/model/task.dart';
 import 'package:todo_app/services/guid_gen.dart';
 
-class AddTaskScreen extends StatelessWidget {
+class EditTaskScreen extends StatelessWidget {
   final _key = GlobalKey<FormState>();
-  AddTaskScreen({
+
+  final Task oldTask;
+
+  EditTaskScreen({
     super.key,
+    required this.oldTask,
   });
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController titleController = TextEditingController();
+    TextEditingController titleController =
+        TextEditingController(text: oldTask.title);
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -21,13 +26,13 @@ class AddTaskScreen extends StatelessWidget {
             child: TextFormField(
               validator: (value) {
                 if (titleController.text.isEmpty) {
-                  return 'Enter your task!';
+                  return 'Enter something!';
                 }
               },
               autofocus: true,
               controller: titleController,
               decoration: const InputDecoration(
-                hintText: 'Add Title',
+                hintText: 'Edit Title',
                 hintStyle: TextStyle(color: Colors.grey),
                 border: OutlineInputBorder(),
               ),
@@ -46,16 +51,17 @@ class AddTaskScreen extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   if (_key.currentState!.validate()) {
-                    var task = Task(
+                    var editedTask = Task(
                       date: DateTime.now().toString(),
                       title: titleController.text,
-                      id: GUIDGen.generate(),
+                      id: oldTask.id,
+                      isDone: false,
                     );
-                    context.read<TasksBloc>().add(AddTask(task: task));
+                    context.read<TasksBloc>().add(EditTask(oldTask: oldTask, newTsak: editedTask));
                     Navigator.pop(context);
                   }
                 },
-                child: const Text('Add'),
+                child: const Text('Save'),
               ),
             ],
           ),

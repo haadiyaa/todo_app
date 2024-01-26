@@ -27,7 +27,7 @@ class _TabsScreenState extends State<TabsScreen> {
               child: Container(
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: const AddTaskScreen(),
+                child:  AddTaskScreen(),
               ),
             ));
   }
@@ -36,7 +36,7 @@ class _TabsScreenState extends State<TabsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_pages[_selectedPageIndex]['title']),
+        title: Text(_pages[_selectedPageIndex]['title'],style: TextStyle(fontSize: 30),),
       ),
       drawer: DrawerPanel(),
       body: _pages[_selectedPageIndex]['pageName'],
