@@ -14,7 +14,7 @@ class TaskList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.separated(
-        separatorBuilder: (context, index) => SizedBox(height: 5,),
+        separatorBuilder: (context, index) => const SizedBox(height: 10,),
         itemCount: tasksList.length,
         itemBuilder: (BuildContext context, int index) {
           var task = tasksList[index];

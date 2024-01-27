@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/blocs/bloc_exports.dart';
-import 'package:todo_app/screens/pending_tasks_screen.dart';
 import 'package:todo_app/screens/recycle_bin.dart';
 import 'package:todo_app/screens/tabs_screen.dart';
 
@@ -16,14 +15,13 @@ class DrawerPanel extends StatelessWidget {
         elevation: 10,
         shadowColor: Colors.black,
         child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
               child: Text(
                 'Task Drawer',
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
             ),
             BlocBuilder<TasksBloc, TasksState>(
@@ -52,17 +50,20 @@ class DrawerPanel extends StatelessWidget {
                 );
               },
             ),
-            BlocBuilder<SwitchBloc, SwitchState>(
-              builder: (context, state) {
-                return Switch(
-                  value: state.switchValue,
-                  onChanged: (newValue) {
-                    newValue
-                        ? context.read<SwitchBloc>().add(SwitchOnEvent())
-                        : context.read<SwitchBloc>().add(SwitchOffEvent());
-                  },
-                );
-              },
+            ListTile(
+              title: const Text('Theme'),
+              trailing: BlocBuilder<SwitchBloc, SwitchState>(
+                builder: (context, state) {
+                  return Switch(
+                    value: state.switchValue,
+                    onChanged: (newValue) {
+                      newValue
+                          ? context.read<SwitchBloc>().add(SwitchOnEvent())
+                          : context.read<SwitchBloc>().add(SwitchOffEvent());
+                    },
+                  );
+                },
+              ),
             ),
           ],
         ),

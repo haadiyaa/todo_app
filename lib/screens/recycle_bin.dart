@@ -15,18 +15,6 @@ class RecycleBin extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            // actions: [
-            //   IconButton(
-            //       onPressed: () {_addTask(context);},
-            //       icon: const Icon(
-            //         Icons.add,
-            //         size: 30,
-            //       ))
-            // ],
-            // leading: const Icon(
-            //   Icons.format_list_numbered_rounded,
-            //   size: 30,
-            // ),
             shadowColor: Colors.black,
             elevation: 2,
             title: const Text(

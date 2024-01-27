@@ -40,7 +40,7 @@ class TaskTile extends StatelessWidget {
       children: [
         Row(
           children: [
-            SizedBox(
+            const SizedBox(
               width: 20,
             ),
             Column(
@@ -49,9 +49,9 @@ class TaskTile extends StatelessWidget {
                 Text(
                   task.title,
                   style: task.isDeleted == false
-                      ? TextStyle(fontSize: 18)
-                      : TextStyle(
-                          color: const Color.fromARGB(255, 173, 40, 30),
+                      ? const TextStyle(fontSize: 18)
+                      : const TextStyle(
+                          color: Color.fromARGB(255, 173, 40, 30),
                           fontSize: 18),
                 ),
                 Text(
@@ -59,8 +59,8 @@ class TaskTile extends StatelessWidget {
                       .format(DateTime.parse(task.date)),
                   style: task.isDeleted == false
                       ? null
-                      : TextStyle(
-                          color: const Color.fromARGB(255, 173, 40, 30)),
+                      : const TextStyle(
+                          color: Color.fromARGB(255, 173, 40, 30)),
                 ),
               ],
             ),
@@ -81,7 +81,6 @@ class TaskTile extends StatelessWidget {
               _removedOrDeletedTask(context, task);
             },
             editTaskCallback: () {
-              // Navigator.of(context).pop();
               _editTask(context);
             },
           ),

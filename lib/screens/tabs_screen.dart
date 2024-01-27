@@ -42,7 +42,6 @@ class _TabsScreenState extends State<TabsScreen> {
       body: _pages[_selectedPageIndex]['pageName'],
       floatingActionButton: _selectedPageIndex == 0
           ? FloatingActionButton(
-              hoverColor: Colors.green,
               onPressed: () {
                 _addTask(context);
               },

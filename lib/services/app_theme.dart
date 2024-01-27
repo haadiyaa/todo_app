@@ -33,10 +33,16 @@ class AppThemes {
         unselectedItemColor: Colors.grey,
         selectedItemColor: Colors.white,
       ),
+      appBarTheme: const AppBarTheme(
+        iconTheme: IconThemeData(color: Colors.white, size: 30),
+        titleTextStyle: TextStyle(
+            color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
+        backgroundColor: Colors.black,
+        elevation: 5,
+        shadowColor: Color.fromARGB(255, 88, 88, 88),
+      ),
     ),
 
-    //
-    //
 
     AppTheme.lightTheme: ThemeData(
       primarySwatch: Colors.deepPurple,

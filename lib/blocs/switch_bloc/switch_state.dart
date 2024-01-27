@@ -20,8 +20,6 @@ class SwitchState extends Equatable {
       switchValue: map['switchValue'] ??false,
     );
   }
-
-
 }
 
 final class SwitchInitial extends SwitchState {

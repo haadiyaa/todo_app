@@ -20,12 +20,12 @@ class PopupMenu extends StatelessWidget {
         itemBuilder: task.isDeleted == false
             ? ((context) => [
                   PopupMenuItem(
+                     onTap: editTaskCallback,
                      child: TextButton.icon(
                       onPressed: null,
                       icon: const Icon(Icons.edit),
                       label: const Text('Edit'),
                     ),
-                    onTap: editTaskCallback,
                   ),
 
                   PopupMenuItem(
@@ -38,14 +38,7 @@ class PopupMenu extends StatelessWidget {
                   ),
                 ])
             : (context) => [
-                  PopupMenuItem(
-                    onTap: (){},
-                    child: TextButton.icon(
-                      onPressed: null,
-                      icon: const Icon(Icons.restore_from_trash),
-                      label: const Text('Restore'),
-                    ),
-                  ),
+                  
                   PopupMenuItem(
                     onTap: cancelOrDeleteCallback,
                     child: TextButton.icon(
